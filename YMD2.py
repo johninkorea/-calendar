@@ -18,18 +18,19 @@ while True:
     
     y=y0 or y1 or y2
     z=z0 or z1 or z2
-    
+    print(float(YMD[1]))
     if y==True and z==False:   # break when all of input are numbers.
        break
-    
     else:
         print("you have to enter numbers")   # print errer message
 
 # take input to variable.
 Y=int(YMD[0])
 M=int(YMD[1])
+if M>12:
+    M=M%12
+    Y+=1
 D=int(YMD[2])
-
 
 
 # calculate Julian Day
@@ -43,19 +44,17 @@ JD=(367*Y-f+g+D+1721013.5-0.5*h+0.5)
 W=JD%7//1    
 DFW={1.:'wednes', 2.:'Thurs', 3.:'fri', 4.:'satur', 5.:'sun', 6.:'mon', 0.:'tues'}
 W=DFW[W]
-
+#######################################################################################3333
 # print Day of week    
-print(f"That day is {W}day.")
 
 
 # calculate first day of month
 JD0=(367*Y-f+g+1+1721013.5-0.5*h+0.5)
 W0=JD0%7//1
-print(f"The month that corresponds to the date you entered begins on {W0}day.")
 
 
 # calculate if that year are leap year. 
-m=[31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]  
+m=[31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]  
 if Y/400%1==0:
     m[1]=29
     print("The year is the leap year.")
@@ -80,27 +79,33 @@ if W0==5 or W0==6:
     W0=W0-5
 else:
     W0=W0+2
-
-
+W1=DFW[W0]
 
 # print reult
-print("\n","*"*40,"\nPrint calendar\nsun\tmon\ttue\twed\tthur\tfri\tsat")
+if (D>m[M-1]):
+    print("$$$$$$input error$$$$$$")
+    print("day number are bigger than day of each month.")
+elif D<=m[M]:
+    print(f"That day is {W}day.")
+    print(f"The month that corresponds to the date you entered begins on {W1}day.")
+    print("\n","*"*40,"\nPrint calendar\nsun\tmon\ttue\twed\tthur\tfri\tsat")
 
 
-# add zeros emty space
-MF=[]
-z=0
-while z<W0:
-    MF.insert(z,0)
-    z+=1
+    # add zeros emty space
+    MF=[]
+    z=0
+    while z<W0:
+        MF.insert(z,0)
+        z+=1
 
-# make day lost in one line
-x=1
-while x<m[M-1]+1:
-    MF.append(x)
-    x+=1
+    # make day lost in one line
+    x=1
+    while x<m[M-1]+1:
+        MF.append(x)
+        x+=1
 
 
-for k,v in enumerate(range(len(MF)),1):
-    print("{}\t".format(MF[v]), end='\n' if k%7==0 else '  ' )
+    for k,v in enumerate(range(len(MF)),1):
+        print("{}\t".format(MF[v]), end='\n' if k%7==0 else '  ' )
 
+print("\n")

@@ -1,18 +1,11 @@
 
 import math
+import numpy as np
 
 def df (a):
     s=a//1
     return s
 
-def sign (a):
-    if a<0:
-        s=int(-1)
-    elif a>0:
-        s=int(1)
-    else:
-        s=0
-    return s
 
 
 YMD=[]
@@ -46,34 +39,20 @@ D=int(YMD[2])
 e=df((M+9)/12)
 f=df(7*(Y+e)/4)
 g=df((275*M)/9)
-h=sign(100*Y+M-190002.5)
+h=np.sign(100*Y+M-190002.5)
 JD=(367*Y-f+g+D+1721013.5-0.5*h+0.5)
 W=JD%7//1
 
+day_of_the_week={1.:'수', 2.:'목', 3.:'금', 4.:'토', 5.:'일', 6.:'월', 0.:'화'}
 
-def week(W):
-    if W==1:
-        W='수'
-    elif W==2:
-        W='목'
-    elif W==3:
-        W='금'
-    elif W==4:
-        W='토'
-    elif W==5:
-        W='일'
-    elif W==6:
-        W='월'
-    else:
-        W='화'
-    return W
+W=day_of_the_week[W]
     
-print("해당 날은 {}요일입니다.".format(week(W)))
+print(f"해당 날은 {W}요일입니다.")
 
 
 JD0=(367*Y-f+g+1+1721013.5-0.5*h+0.5)
 W0=JD0%7//1
-print("입력한 날짜에 해당하는 달은 {}요일에 시작합니다.".format(week(W0)))
+print(f"입력한 날짜에 해당하는 달은 {W}요일에 시작합니다.")
 
 ###########################################################
 #윤년 계산
